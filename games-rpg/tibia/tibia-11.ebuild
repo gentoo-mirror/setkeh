@@ -13,20 +13,18 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND="virtual/opengl"
+RDEPEND="
+	virtual/opengl
+	dev-qt/qtcore
+	dev-qt/qtgui
+"
 
 S=${WORKDIR}/Tibia
 src_install() {
 
-	exeinto "/opt/tibia"
-	doexe Tibia Showerror Patch
 	insinto "/opt/tibia"
-	doins Tibia.{dat,pic,spr,xpm}
-	doexe "Patch"
-	doexe "Showerror"
-	doins "StartTibia.sh"
-	doins -r "libc6"
-	dosym /opt/tibia-client/Tibia /usr/bin/tibia
-
-	make_desktop_entry ${PN} KickBall ${PN}.xpm
+	exeinto "/opt/tibia"
+	doins -r *
+	doexe Tibia
+	dosym /opt/tibia/Tibia /usr/bin/tibia
 }
